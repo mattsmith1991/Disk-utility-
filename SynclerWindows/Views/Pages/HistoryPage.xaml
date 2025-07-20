@@ -1,0 +1,9 @@
+<UserControl x:Class="SynclerWindows.Views.Pages.HistoryPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Style="{StaticResource SynclerCardStyle}">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="📜" FontSize="72" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+            <TextBlock Text="Watch History" Style="{StaticResource SynclerHeadingStyle}" HorizontalAlignment="Center"/>
+            <TextBlock Text="Previously watched content" Style="{StaticResource SynclerBodyTextStyle}" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Border>
+</UserControl>

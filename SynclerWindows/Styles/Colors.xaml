@@ -1,0 +1,46 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Primary Colors -->
+    <Color x:Key="SynclerPrimaryColor">#6C5CE7</Color>
+    <Color x:Key="SynclerSecondaryColor">#2D3748</Color>
+    <Color x:Key="SynclerAccentColor">#4FD1C7</Color>
+    
+    <!-- Background Colors -->
+    <Color x:Key="SynclerBackgroundColor">#1A202C</Color>
+    <Color x:Key="SynclerSurfaceColor">#2D3748</Color>
+    <Color x:Key="SynclerCardColor">#374151</Color>
+    <Color x:Key="SynclerHeaderColor">#111827</Color>
+    
+    <!-- Text Colors -->
+    <Color x:Key="SynclerTextPrimaryColor">#FFFFFF</Color>
+    <Color x:Key="SynclerTextSecondaryColor">#A0AEC0</Color>
+    <Color x:Key="SynclerTextMutedColor">#718096</Color>
+    
+    <!-- Status Colors -->
+    <Color x:Key="SynclerSuccessColor">#48BB78</Color>
+    <Color x:Key="SynclerWarningColor">#ED8936</Color>
+    <Color x:Key="SynclerErrorColor">#F56565</Color>
+    <Color x:Key="SynclerInfoColor">#4299E1</Color>
+    
+    <!-- Interactive Colors -->
+    <Color x:Key="SynclerHoverColor">#4C51BF</Color>
+    <Color x:Key="SynclerPressedColor">#553C9A</Color>
+    <Color x:Key="SynclerFocusColor">#805AD5</Color>
+    
+    <!-- Border Colors -->
+    <Color x:Key="SynclerBorderColor">#4A5568</Color>
+    <Color x:Key="SynclerDividerColor">#2D3748</Color>
+    
+    <!-- Gradients -->
+    <LinearGradientBrush x:Key="SynclerPrimaryGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#6C5CE7" Offset="0"/>
+        <GradientStop Color="#4C51BF" Offset="1"/>
+    </LinearGradientBrush>
+    
+    <LinearGradientBrush x:Key="SynclerCardGradient" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#374151" Offset="0"/>
+        <GradientStop Color="#2D3748" Offset="1"/>
+    </LinearGradientBrush>
+    
+</ResourceDictionary>

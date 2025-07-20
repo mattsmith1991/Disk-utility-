@@ -1,0 +1,285 @@
+<Window x:Class="SynclerWindows.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:viewmodels="clr-namespace:SynclerWindows.ViewModels"
+        Title="Syncler Windows" 
+        Height="800" 
+        Width="1400"
+        MinHeight="600"
+        MinWidth="1000"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Background="{StaticResource SynclerBackgroundBrush}"
+        ui:WindowHelper.UseModernWindowStyle="True">
+    
+    <Window.DataContext>
+        <viewmodels:MainViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Title Bar -->
+        <Border Grid.Row="0" 
+                Background="{StaticResource SynclerHeaderColor}"
+                Height="60"
+                BorderBrush="{StaticResource SynclerDividerColor}"
+                BorderThickness="0,0,0,1">
+            <Grid Margin="20,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Logo and Title -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Ellipse Width="32" Height="32" 
+                             Fill="{StaticResource SynclerPrimaryGradient}"
+                             Margin="0,0,12,0"/>
+                    <TextBlock Text="Syncler" 
+                               FontSize="20" 
+                               FontWeight="Bold"
+                               Foreground="{StaticResource SynclerTextBrush}"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+                
+                <!-- Search Box -->
+                <Border Grid.Column="1" 
+                        Background="{StaticResource SynclerSurfaceBrush}"
+                        CornerRadius="20"
+                        Margin="40,0"
+                        MaxWidth="400"
+                        Height="36"
+                        VerticalAlignment="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Column="0" 
+                                   Text="🔍" 
+                                   FontSize="16"
+                                   VerticalAlignment="Center"
+                                   Margin="12,0,8,0"
+                                   Foreground="{StaticResource SynclerTextSecondaryBrush}"/>
+                        
+                        <TextBox Grid.Column="1"
+                                 x:Name="SearchBox"
+                                 Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Foreground="{StaticResource SynclerTextBrush}"
+                                 VerticalAlignment="Center"
+                                 FontSize="14">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        
+                        <TextBlock Grid.Column="2"
+                                   Text="Search movies, TV shows..."
+                                   FontSize="12"
+                                   Foreground="{StaticResource SynclerTextSecondaryBrush}"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,12,0"
+                                   Visibility="{Binding ElementName=SearchBox, Path=Text.IsEmpty, Converter={x:Static ui:Converters.BooleanToVisibilityConverter}}"/>
+                    </Grid>
+                </Border>
+                
+                <!-- Profile -->
+                <Button Grid.Column="2" 
+                        Style="{StaticResource SynclerButtonStyle}"
+                        Command="{Binding ShowProfileCommand}"
+                        Background="Transparent"
+                        Margin="8,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="24" Height="24" 
+                                 Fill="{StaticResource SynclerAccentBrush}"
+                                 Margin="0,0,8,0"/>
+                        <TextBlock Text="{Binding CurrentUser.Name}" 
+                                   VerticalAlignment="Center"
+                                   Foreground="{StaticResource SynclerTextBrush}"/>
+                    </StackPanel>
+                </Button>
+                
+                <!-- Settings -->
+                <Button Grid.Column="3"
+                        Style="{StaticResource SynclerButtonStyle}"
+                        Command="{Binding ShowSettingsCommand}"
+                        Background="Transparent"
+                        Margin="8,0">
+                    <TextBlock Text="⚙️" FontSize="16"/>
+                </Button>
+            </Grid>
+        </Border>
+        
+        <!-- Main Content -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Sidebar Navigation -->
+            <Border Grid.Column="0" 
+                    Background="{StaticResource SynclerSurfaceBrush}"
+                    BorderBrush="{StaticResource SynclerDividerColor}"
+                    BorderThickness="0,0,1,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="16">
+                    <StackPanel>
+                        <!-- Home Section -->
+                        <TextBlock Text="HOME" 
+                                   Style="{StaticResource SynclerBodyTextStyle}"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,8"
+                                   Foreground="{StaticResource SynclerTextSecondaryBrush}"/>
+                        
+                        <Button Style="{StaticResource SynclerMenuItemStyle}"
+                                Command="{Binding NavigateCommand}"
+                                CommandParameter="Home"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🏠" FontSize="16" Margin="0,0,12,0"/>
+                                <TextBlock Text="Dashboard"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <Button Style="{StaticResource SynclerMenuItemStyle}"
+                                Command="{Binding NavigateCommand}"
+                                CommandParameter="Continue"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="▶️" FontSize="16" Margin="0,0,12,0"/>
+                                <TextBlock Text="Continue Watching"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <Button Style="{StaticResource SynclerMenuItemStyle}"
+                                Command="{Binding NavigateCommand}"
+                                CommandParameter="Watchlist"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📋" FontSize="16" Margin="0,0,12,0"/>
+                                <TextBlock Text="Watchlist"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <!-- Browse Section -->
+                        <TextBlock Text="BROWSE" 
+                                   Style="{StaticResource SynclerBodyTextStyle}"
+                                   FontWeight="SemiBold"
+                                   Margin="0,24,0,8"
+                                   Foreground="{StaticResource SynclerTextSecondaryBrush}"/>
+                        
+                        <Button Style="{StaticResource SynclerMenuItemStyle}"
+                                Command="{Binding NavigateCommand}"
+                                CommandParameter="Movies"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🎬" FontSize="16" Margin="0,0,12,0"/>
+                                <TextBlock Text="Movies"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <Button Style="{StaticResource SynclerMenuItemStyle}"
+                                Command="{Binding NavigateCommand}"
+                                CommandParameter="TVShows"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📺" FontSize="16" Margin="0,0,12,0"/>
+                                <TextBlock Text="TV Shows"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <Button Style="{StaticResource SynclerMenuItemStyle}"
+                                Command="{Binding NavigateCommand}"
+                                CommandParameter="Anime"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🎌" FontSize="16" Margin="0,0,12,0"/>
+                                <TextBlock Text="Anime"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <!-- Library Section -->
+                        <TextBlock Text="LIBRARY" 
+                                   Style="{StaticResource SynclerBodyTextStyle}"
+                                   FontWeight="SemiBold"
+                                   Margin="0,24,0,8"
+                                   Foreground="{StaticResource SynclerTextSecondaryBrush}"/>
+                        
+                        <Button Style="{StaticResource SynclerMenuItemStyle}"
+                                Command="{Binding NavigateCommand}"
+                                CommandParameter="Downloads"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📥" FontSize="16" Margin="0,0,12,0"/>
+                                <TextBlock Text="Downloads"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <Button Style="{StaticResource SynclerMenuItemStyle}"
+                                Command="{Binding NavigateCommand}"
+                                CommandParameter="History"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📜" FontSize="16" Margin="0,0,12,0"/>
+                                <TextBlock Text="History"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <!-- Debrid Section -->
+                        <TextBlock Text="DEBRID" 
+                                   Style="{StaticResource SynclerBodyTextStyle}"
+                                   FontWeight="SemiBold"
+                                   Margin="0,24,0,8"
+                                   Foreground="{StaticResource SynclerTextSecondaryBrush}"/>
+                        
+                        <Button Style="{StaticResource SynclerMenuItemStyle}"
+                                Command="{Binding NavigateCommand}"
+                                CommandParameter="Cloud"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="☁️" FontSize="16" Margin="0,0,12,0"/>
+                                <TextBlock Text="Cloud Files"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <Button Style="{StaticResource SynclerMenuItemStyle}"
+                                Command="{Binding NavigateCommand}"
+                                CommandParameter="Transfers"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🔄" FontSize="16" Margin="0,0,12,0"/>
+                                <TextBlock Text="Transfers"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+            
+            <!-- Main Content Area -->
+            <ContentPresenter Grid.Column="1" 
+                              Content="{Binding CurrentView}"
+                              Margin="24"/>
+        </Grid>
+    </Grid>
+</Window>
