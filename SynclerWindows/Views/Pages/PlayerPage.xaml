@@ -1,0 +1,22 @@
+<UserControl x:Class="SynclerWindows.Views.Pages.PlayerPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Background="Black">
+        <Border Style="{StaticResource SynclerCardStyle}" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                Background="{StaticResource SynclerBackgroundBrush}">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="🎥" FontSize="96" HorizontalAlignment="Center" Margin="0,0,0,24"/>
+                <TextBlock Text="Media Player" Style="{StaticResource SynclerHeadingStyle}" HorizontalAlignment="Center"/>
+                <TextBlock Text="Video playback would appear here" Style="{StaticResource SynclerBodyTextStyle}" HorizontalAlignment="Center" Margin="0,8,0,24"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="⏮️" Style="{StaticResource SynclerButtonStyle}" Margin="4"/>
+                    <Button Content="⏯️" Style="{StaticResource SynclerButtonStyle}" Margin="4"/>
+                    <Button Content="⏭️" Style="{StaticResource SynclerButtonStyle}" Margin="4"/>
+                    <Button Content="⏹️" Style="{StaticResource SynclerButtonStyle}" Margin="4"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
